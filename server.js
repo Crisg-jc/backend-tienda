@@ -12,18 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 // Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/mitienda', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => {
-  console.log("📦 Conectado a MongoDB");
-  const PORT = process.env.PORT || 3001;
-  app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-  });
-})
-.catch(err => console.error('❌ Error conectando a MongoDB:', err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("Conectado a MongoDB"))
+  .catch(err => console.error("Error de conexión:", err));
+
 
 // Configuración de Nodemailer
 const transporter = nodemailer.createTransport({
